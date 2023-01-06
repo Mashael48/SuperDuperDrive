@@ -21,8 +21,10 @@ public class AuthenticationService implements AuthenticationProvider {
 		String password = authentication.getCredentials().toString();
 
 		log.info("usename: {}, password: {}", username, password);
-		return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
+		if (username != null)
+			return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
 
+		return null;
 		// TODO: Add embedded database checking
 		/*
 		 * User user = userMapper.getUser(username); if (user != null) { String
