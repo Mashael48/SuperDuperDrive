@@ -1,6 +1,8 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.HOME_PAGE;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.NOT_SAVED;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.RESULT_PAGE;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.SUCCESS;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -41,17 +43,18 @@ public class NoteController {
 		}
 
 		homeService.updatePage(authentication, model);
-		return HOME_PAGE;
+
+		model.addAttribute(RESULT_PAGE, (success > 0) ? SUCCESS : NOT_SAVED);
+		return RESULT_PAGE;
 	}
 
 	@GetMapping("delete/{noteId}")
 	public String deleteNote(Authentication authentication, Model model, @PathVariable Integer noteId) {
 
 		int success = noteService.deleteNote(noteId);
-
-		Integer userId = userService.getUserId(authentication.getName());
 		homeService.updatePage(authentication, model);
 
-		return HOME_PAGE;
+		model.addAttribute(RESULT_PAGE, (success > 0) ? SUCCESS : NOT_SAVED);
+		return RESULT_PAGE;
 	}
 }
