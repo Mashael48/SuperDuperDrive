@@ -56,8 +56,4 @@ public class UserAccessManagementController {
 		return "login";
 	}
 
-	@GetMapping("/home")
-	public String homePage() {
-		return "home";
-	}
 }
