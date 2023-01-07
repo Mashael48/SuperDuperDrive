@@ -47,7 +47,7 @@ public class CredentialController {
 		return HOME_PAGE;
 	}
 
-	@GetMapping("{credentialId}")
+	@GetMapping("delete/{credentialId}")
 	public String deleteCredential(Authentication authentication, Model model, @PathVariable Integer credentialId) {
 		int success = credentialService.deleteCredential(credentialId);
 		homeService.updatePage(authentication, model);

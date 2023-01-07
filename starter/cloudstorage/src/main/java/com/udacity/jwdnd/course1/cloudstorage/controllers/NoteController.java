@@ -44,7 +44,7 @@ public class NoteController {
 		return HOME_PAGE;
 	}
 
-	@GetMapping("{noteId}")
+	@GetMapping("delete/{noteId}")
 	public String deleteNote(Authentication authentication, Model model, @PathVariable Integer noteId) {
 
 		int success = noteService.deleteNote(noteId);
