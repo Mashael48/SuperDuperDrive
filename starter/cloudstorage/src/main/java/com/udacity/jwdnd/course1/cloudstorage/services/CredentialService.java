@@ -37,6 +37,11 @@ public class CredentialService {
 		return encryptionService.decryptValue(password, key);
 	}
 
+	public int deleteCredential(Integer credentialId) {
+		log.info("deleteCredential: {}", credentialId);
+		return credentialMapper.delete(credentialId);
+	}
+
 	public List<Credential> getCredentialsList(Integer userId) {
 		List<Credential> credentials = credentialMapper.getUserCredentialsList(userId);
 		log.info("getCredentialsList: {}", credentials);
