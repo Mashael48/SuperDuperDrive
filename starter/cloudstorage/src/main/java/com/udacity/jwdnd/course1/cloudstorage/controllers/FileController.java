@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.udacity.jwdnd.course1.cloudstorage.entities.File;
 import com.udacity.jwdnd.course1.cloudstorage.entities.FileForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
@@ -33,7 +34,8 @@ public class FileController {
 	private final HomeService homeService;
 
 	@PostMapping()
-	public String addFile(Authentication authentication, @ModelAttribute("fileForm") FileForm fileForm, Model model) {
+	public String uploadFile(Authentication authentication, @ModelAttribute("fileForm") FileForm fileForm,
+			Model model) {
 
 		Integer userId = userService.getUserId(authentication.getName());
 		log.info("hi {}", fileForm);
@@ -50,6 +52,12 @@ public class FileController {
 
 		homeService.updatePage(authentication, model);
 		return HOME_PAGE;
+	}
+
+	@GetMapping(value = "/{fileId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public @ResponseBody byte[] getFile(@PathVariable Integer fileId) {
+		File file = fileService.getFile(fileId);
+		return file.getFileData();
 	}
 
 }

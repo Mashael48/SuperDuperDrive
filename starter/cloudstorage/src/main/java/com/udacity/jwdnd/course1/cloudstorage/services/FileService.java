@@ -20,11 +20,11 @@ public class FileService {
 	private final FileMapper fileMapper;
 
 	public boolean isFileNameAvailable(String fileName) {
-		return fileMapper.getFile(fileName) == null;
+		return fileMapper.getFileByName(fileName) == null;
 	}
 
-	public File getFile(String fileName) {
-		return fileMapper.getFile(fileName);
+	public File getFile(Integer fileId) {
+		return fileMapper.getFile(fileId);
 	}
 
 	public List<File> getFilesList(Integer userId) {
