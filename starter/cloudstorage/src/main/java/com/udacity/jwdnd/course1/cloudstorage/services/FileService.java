@@ -32,7 +32,7 @@ public class FileService {
 	}
 
 	@SneakyThrows
-	public void addFile(MultipartFile multipartFile, Integer userId) {
+	public int addFile(MultipartFile multipartFile, Integer userId) {
 
 		InputStream fis = multipartFile.getInputStream();
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -51,10 +51,10 @@ public class FileService {
 		String fileSize = String.valueOf(multipartFile.getSize());
 
 		File file = new File(null, fileName, contentType, fileSize, fileData, userId);
-		fileMapper.insert(file);
+		return fileMapper.insert(file);
 	}
 
-	public void deleteFile(String fileName) {
-		fileMapper.deleteFile(fileName);
+	public int deleteFile(String fileName) {
+		return fileMapper.deleteFile(fileName);
 	}
 }

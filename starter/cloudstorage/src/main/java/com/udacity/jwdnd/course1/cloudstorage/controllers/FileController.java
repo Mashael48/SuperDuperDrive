@@ -1,6 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.HOME_PAGE;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.DUBLICATE_FILE_NAME;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.ERROR;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.MESSAGE;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.NOT_SAVED;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.RESULT_PAGE;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.SUCCESS;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -41,13 +46,16 @@ public class FileController {
 		String fileName = multipartFile.getOriginalFilename();
 
 		if (!fileService.isFileNameAvailable(fileName)) {
-			model.addAttribute("message", "You have tried to add a duplicate file.");
+			model.addAttribute(RESULT_PAGE, ERROR);
+			model.addAttribute(MESSAGE, DUBLICATE_FILE_NAME);
 		} else {
-			fileService.addFile(multipartFile, userId);
+			int success = fileService.addFile(multipartFile, userId);
+			model.addAttribute(RESULT_PAGE, (success > 0) ? SUCCESS : NOT_SAVED);
 		}
 
 		homeService.updatePage(authentication, model);
-		return HOME_PAGE;
+
+		return RESULT_PAGE;
 	}
 
 	@GetMapping(value = "get/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -58,8 +66,11 @@ public class FileController {
 
 	@GetMapping(value = "delete/{fileName}")
 	public String deleteFile(Authentication authentication, @PathVariable String fileName, Model model) {
-		fileService.deleteFile(fileName);
+
+		int success = fileService.deleteFile(fileName);
 		homeService.updatePage(authentication, model);
-		return HOME_PAGE;
+
+		model.addAttribute(RESULT_PAGE, (success > 0) ? SUCCESS : NOT_SAVED);
+		return RESULT_PAGE;
 	}
 }
