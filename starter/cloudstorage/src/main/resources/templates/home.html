@@ -75,13 +75,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr th:each="aNote : ${notesList}">
                                         <td>
                                             <button type="button" class="btn btn-success">Edit</button>
                                             <a class="btn btn-danger">Delete</a>
                                         </td>
-                                        <th scope="row">Example Note Title</th>
-                                        <td>Example Note Description </td>
+                                        <th th:text="${aNote.noteTitle}" scope="row">Example Note Title</th>
+                                        <td th:text="${aNote.noteDescription}" >Example Note Description </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -97,7 +97,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#" method="POST">
+                                        <form action="#" th:action="@{/note}"  method="POST">
                                             <input type="hidden" name="noteId" id="note-id">
                                             <div class="form-group">
                                                 <label for="note-title" class="col-form-label">Title</label>
