@@ -158,14 +158,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr th:each="credential : ${credentialsList}">
 									<td>
 										<button type="button" class="btn btn-success">Edit</button> <a
 										class="btn btn-danger">Delete</a>
 									</td>
-									<th scope="row">Example Credential URL</th>
-									<td>Example Credential Username</td>
-									<td>Example Credential Password</td>
+									<th th:text="${credential.url}" scope="row">Example Credential URL</th>
+									<td th:text="${credential.username}">Example Credential Username</td>
+									<td th:text="${credential.password}">Example Credential Password</td>
 								</tr>
 							</tbody>
 						</table>
@@ -184,7 +184,7 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="#" method="POST">
+									<form action="#" th:action="@{/credential}" method="POST">
 										<input type="hidden" name="credentialId" id="credential-id">
 										<div class="form-group">
 											<label for="credential-url" class="col-form-label">URL</label>
