@@ -51,6 +51,11 @@ public class UserAccessManagementController {
 		return "signup";
 	}
 
+	@GetMapping("/logout")
+	public String logout() {
+		return "login";
+	}
+
 	@GetMapping("/home")
 	public String homePage() {
 		return "home";
