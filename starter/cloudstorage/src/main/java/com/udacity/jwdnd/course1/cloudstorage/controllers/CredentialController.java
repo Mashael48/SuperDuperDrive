@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.CREDENTIAL_SERVICE;
 import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.HOME_PAGE;
 
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
+import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class CredentialController {
 
 	private final UserService userService;
 	private final CredentialService credentialService;
+	private final HomeService homeService;
 
 	@PostMapping()
 	public String createUpdateCredential(Authentication authentication, Model model, Credential credential) {
@@ -38,8 +41,8 @@ public class CredentialController {
 			success = credentialService.updateCredential(credential);
 		}
 
-		model.addAttribute("credentialService", credentialService);
-		updatecredentialsList(model, userId);
+		model.addAttribute(CREDENTIAL_SERVICE, credentialService);
+		homeService.updatePage(authentication, model);
 
 		return HOME_PAGE;
 	}
@@ -50,12 +53,8 @@ public class CredentialController {
 		int success = credentialService.deleteCredential(credentialId);
 
 		Integer userId = userService.getUserId(authentication.getName());
-		updatecredentialsList(model, userId);
+		homeService.updatePage(authentication, model);
 
 		return HOME_PAGE;
-	}
-
-	private void updatecredentialsList(Model model, Integer userId) {
-		model.addAttribute("credentialsList", credentialService.getCredentialsList(userId));
 	}
 }

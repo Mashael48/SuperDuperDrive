@@ -37,5 +37,4 @@ public class NoteService {
 		log.info("getNotesList: {}", notes);
 		return notes;
 	}
-
 }

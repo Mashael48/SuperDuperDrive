@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
-import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
-import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,20 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HomeController {
 
-	private final UserService userService;
-	private final NoteService noteService;
-	private final CredentialService credentialService;
+	private final HomeService homeService;
 
 	@GetMapping("/" + HOME_PAGE)
 	public String homePage(Authentication authentication, Model model) {
-
-		Integer userId = userService.getUserId(authentication.getName());
-		model.addAttribute("credentialService", credentialService);
-
-		// Initialize all user's lists
-		model.addAttribute("notesList", noteService.getNotesList(userId));
-		model.addAttribute("credentialsList", credentialService.getCredentialsList(userId));
-
+		homeService.updatePage(authentication, model);
 		return HOME_PAGE;
 	}
 }

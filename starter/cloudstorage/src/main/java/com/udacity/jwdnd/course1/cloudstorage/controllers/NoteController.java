@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.Note;
+import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 
@@ -23,6 +24,7 @@ public class NoteController {
 
 	private final UserService userService;
 	private final NoteService noteService;
+	private final HomeService homeService;
 
 	@PostMapping()
 	public String createUpdateNote(Authentication authentication, Model model, Note note) {
@@ -38,7 +40,7 @@ public class NoteController {
 			success = noteService.updateNote(note);
 		}
 
-		updateNotesList(model, userId);
+		homeService.updatePage(authentication, model);
 		return HOME_PAGE;
 	}
 
@@ -48,12 +50,8 @@ public class NoteController {
 		int success = noteService.deleteNote(noteId);
 
 		Integer userId = userService.getUserId(authentication.getName());
-		updateNotesList(model, userId);
+		homeService.updatePage(authentication, model);
 
 		return HOME_PAGE;
-	}
-
-	private void updateNotesList(Model model, Integer userId) {
-		model.addAttribute("notesList", noteService.getNotesList(userId));
 	}
 }
