@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -40,11 +39,6 @@ public class UserService {
 		User user = userMapper.getUser(username);
 		log.info("getUser: {}" + user);
 		return user;
-	}
-
-	public List<User> getAllUsers() {
-		// TODO: Remove
-		return userMapper.getAllUsers();
 	}
 
 	private static String generateEncodedSalt() {

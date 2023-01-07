@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/signup", "/css/**", "/js/**", "/users") // TODO: Remove /users
+			.antMatchers("/signup", "/css/**", "/js/**")
 			.permitAll()
 			.anyRequest()
 			.authenticated(); // Add paths that doesn't require login

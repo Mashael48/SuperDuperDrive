@@ -1,13 +1,10 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
@@ -16,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class AuthController {
+public class UserAccessManagementController {
 
 	private final UserService userService;
 
@@ -54,14 +51,13 @@ public class AuthController {
 		return "signup";
 	}
 
-	@GetMapping("/users")
-	public @ResponseBody List<User> allUsersList() {
-		// TODO: Remove
-		return userService.getAllUsers();
+	@GetMapping("/logout")
+	public String logout() {
+		return "login";
 	}
-	
+
 	@GetMapping("/home")
-	public @ResponseBody String homePage() {
-		return "HOME!";
+	public String homePage() {
+		return "home";
 	}
 }
