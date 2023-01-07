@@ -31,9 +31,13 @@ public class CredentialController {
 
 		if (credential.getCredentialId() == null) {
 			success = credentialService.createCredential(credential);
+		} else {
+			success = credentialService.updateCredential(credential);
 		}
 
+		model.addAttribute("credentialService", credentialService);
 		updatecredentialsList(model, userId);
+
 		return HOME_PAGE;
 	}
 

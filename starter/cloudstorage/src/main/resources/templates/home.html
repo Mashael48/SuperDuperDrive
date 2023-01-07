@@ -160,12 +160,20 @@
 							<tbody>
 								<tr th:each="credential : ${credentialsList}">
 									<td>
-										<button type="button" class="btn btn-success">Edit</button> <a
-										class="btn btn-danger">Delete</a>
+										<button type="button" class="btn btn-success"
+											th:data-id="${credential.credentialId}"
+											th:data-url="${credential.url}"
+											th:data-username="${credential.username}"
+											th:data-password="${credentialService.getDecodedPassword(credential.password, credential.key)}"
+											th:onclick="showCredentialModal(this.getAttribute('data-id'), this.getAttribute('data-url'), this.getAttribute('data-username'), this.getAttribute('data-password'))">
+											Edit</button> <a class="btn btn-danger">Delete</a>
 									</td>
-									<th th:text="${credential.url}" scope="row">Example Credential URL</th>
-									<td th:text="${credential.username}">Example Credential Username</td>
-									<td th:text="${credential.password}">Example Credential Password</td>
+									<th th:text="${credential.url}" scope="row">Example
+										Credential URL</th>
+									<td th:text="${credential.username}">Example Credential
+										Username</td>
+									<td th:text="${credential.password}">Example Credential
+										Password</td>
 								</tr>
 							</tbody>
 						</table>

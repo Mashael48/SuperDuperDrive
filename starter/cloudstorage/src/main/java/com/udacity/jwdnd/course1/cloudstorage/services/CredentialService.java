@@ -22,14 +22,14 @@ public class CredentialService {
 
 	public int createCredential(Credential credential) {
 		log.info("createCredential: {}", credential);
-
-		String encodedKey = generateEncodeKey();
-		String encryptedPassword = encryptionService.encryptValue(credential.getPassword(), encodedKey);
-
-		credential.setKey(encodedKey);
-		credential.setPassword(encryptedPassword);
-
+		encodePasswordWithKey(credential);
 		return credentialMapper.insert(credential);
+	}
+
+	public int updateCredential(Credential credential) {
+		log.info("updateCredential: {}", credential);
+		encodePasswordWithKey(credential);
+		return credentialMapper.update(credential);
 	}
 
 	public String getDecodedPassword(String password, String key) {
@@ -41,6 +41,15 @@ public class CredentialService {
 		List<Credential> credentials = credentialMapper.getUserCredentialsList(userId);
 		log.info("getCredentialsList: {}", credentials);
 		return credentials;
+	}
+
+	private void encodePasswordWithKey(Credential credential) {
+
+		String encodedKey = generateEncodeKey();
+		String encryptedPassword = encryptionService.encryptValue(credential.getPassword(), encodedKey);
+
+		credential.setKey(encodedKey);
+		credential.setPassword(encryptedPassword);
 	}
 
 	private static String generateEncodeKey() {
