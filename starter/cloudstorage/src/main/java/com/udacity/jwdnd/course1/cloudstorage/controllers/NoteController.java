@@ -25,16 +25,6 @@ public class NoteController {
 	private final NoteService noteService;
 	private final UserService userService;
 
-	@GetMapping()
-	public String viewNote() {
-		return HOME_PAGE;
-	}
-
-	@GetMapping("/list")
-	public String viewNotesList() {
-		return HOME_PAGE;
-	}
-
 	@PostMapping()
 	public String createUpdateNote(Authentication authentication, Note note, Model model) {
 		User user = userService.getUser(authentication.getName());

@@ -37,7 +37,7 @@ public class UserService {
 
 	public User getUser(String username) {
 		User user = userMapper.getUser(username);
-		log.info("getUser: {}" + user);
+		log.info("getUser: {}", user);
 		return user;
 	}
 

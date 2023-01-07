@@ -75,7 +75,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="aNote : ${notesList}">
+                                    <tr th:each="note : ${notesList}">
                                         <td>
                                             <button type="button" class="btn btn-success"
                                                 th:data-id="${note.noteId}"
@@ -85,8 +85,8 @@
 	                                            Edit</button>
                                             <a class="btn btn-danger" th:href="@{/note/{noteId}(noteId = ${note.getNoteId()})}">Delete</a>
                                         </td>
-                                        <th th:text="${aNote.noteTitle}" scope="row">Example Note Title</th>
-                                        <td th:text="${aNote.noteDescription}" >Example Note Description </td>
+                                        <th th:text="${note.noteTitle}" scope="row">Example Note Title</th>
+                                        <td th:text="${note.noteDescription}" >Example Note Description </td>
                                     </tr>
                                 </tbody>
                             </table>

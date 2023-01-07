@@ -34,7 +34,7 @@ public class NoteService {
 
 	public List<Note> getNotesList() {
 		List<Note> notes = noteMapper.getNotesList();
-		log.info("getNotesList: {}" + notes);
+		log.info("getNotesList: {}", notes);
 		return notes;
 	}
 
