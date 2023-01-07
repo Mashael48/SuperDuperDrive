@@ -6,10 +6,12 @@ public interface Constants {
 	public static final String HOME_PAGE = "home";
 
 	// ** Lists ** //
+	public static final String FILES_LIST = "filesList";
 	public static final String NOTES_LIST = "notesList";
 	public static final String CREDENTIALS_LIST = "credentialsList";
 
 	// ** FE variable ** //
+	public static final String FILE_FORM = "fileForm";
 	public static final String CREDENTIAL_SERVICE = "credentialService";
 
 }
