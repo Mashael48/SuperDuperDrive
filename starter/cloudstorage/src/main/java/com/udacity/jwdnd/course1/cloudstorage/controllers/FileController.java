@@ -21,9 +21,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping("/file")
 @RequiredArgsConstructor
@@ -38,14 +36,12 @@ public class FileController {
 			Model model) {
 
 		Integer userId = userService.getUserId(authentication.getName());
-		log.info("hi {}", fileForm);
 
 		MultipartFile multipartFile = fileForm.getFile();
 		String fileName = multipartFile.getOriginalFilename();
 
 		if (!fileService.isFileNameAvailable(fileName)) {
 			model.addAttribute("message", "You have tried to add a duplicate file.");
-
 		} else {
 			fileService.addFile(multipartFile, userId);
 		}
@@ -54,10 +50,16 @@ public class FileController {
 		return HOME_PAGE;
 	}
 
-	@GetMapping(value = "/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping(value = "get/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public @ResponseBody byte[] getFile(@PathVariable String fileName) {
 		File file = fileService.getFile(fileName);
 		return file.getFileData();
 	}
 
+	@GetMapping(value = "delete/{fileName}")
+	public String deleteFile(Authentication authentication, @PathVariable String fileName, Model model) {
+		fileService.deleteFile(fileName);
+		homeService.updatePage(authentication, model);
+		return HOME_PAGE;
+	}
 }

@@ -53,4 +53,8 @@ public class FileService {
 		File file = new File(null, fileName, contentType, fileSize, fileData, userId);
 		fileMapper.insert(file);
 	}
+
+	public void deleteFile(String fileName) {
+		fileMapper.deleteFile(fileName);
+	}
 }
