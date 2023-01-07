@@ -38,18 +38,25 @@ public class NoteController {
 		User user = userService.getUser(authentication.getName());
 		note.setUserId(user.getUserId());
 
-		int rowsAdded = noteService.createNote(note);
-		if (rowsAdded < 0) {
-			String errMsg = "There was an error craating the note. Please try again."; // TODO
-		}
-		
-        model.addAttribute("notesList", noteService.getNotesList());
+		@SuppressWarnings("unused")
+		int success = 0;
 
+		if (note.getNoteId() == null) {
+			success = noteService.createNote(note);
+		} else {
+			success = noteService.updateNote(note);
+		}
+
+		updateNotesList(model);
 		return HOME_PAGE;
 	}
 
 	@DeleteMapping("/note")
 	public String deleteNote() {
 		return HOME_PAGE;
+	}
+
+	private void updateNotesList(Model model) {
+		model.addAttribute("notesList", noteService.getNotesList());
 	}
 }

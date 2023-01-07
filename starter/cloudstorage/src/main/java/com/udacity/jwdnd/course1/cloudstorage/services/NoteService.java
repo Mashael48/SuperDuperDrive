@@ -22,6 +22,11 @@ public class NoteService {
 		return noteMapper.insert(note);
 	}
 
+	public int updateNote(Note note) {
+		log.info("updateNote: {}", note);
+		return noteMapper.update(note);
+	}
+
 	public List<Note> getNotesList() {
 		List<Note> notes = noteMapper.getNotesList();
 		log.info("getNotesList: {}" + notes);
