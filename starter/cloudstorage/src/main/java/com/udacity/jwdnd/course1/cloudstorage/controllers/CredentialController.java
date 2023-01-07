@@ -20,8 +20,9 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/credential")
 @RequiredArgsConstructor
 public class CredentialController {
-	private final CredentialService credentialService;
+
 	private final UserService userService;
+	private final CredentialService credentialService;
 
 	@PostMapping()
 	public String createUpdateCredential(Authentication authentication, Model model, Credential credential) {

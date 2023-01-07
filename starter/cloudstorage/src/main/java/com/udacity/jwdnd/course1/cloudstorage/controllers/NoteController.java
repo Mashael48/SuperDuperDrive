@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoteController {
 
-	private final NoteService noteService;
 	private final UserService userService;
+	private final NoteService noteService;
 
 	@PostMapping()
 	public String createUpdateNote(Authentication authentication, Model model, Note note) {
