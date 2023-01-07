@@ -37,8 +37,14 @@ public class UserService {
 
 	public User getUser(String username) {
 		User user = userMapper.getUser(username);
-		log.info("getUser: {}" + user);
+		log.info("getUser: {}", user);
 		return user;
+	}
+
+	public Integer getUserId(String username) {
+		User user = userMapper.getUser(username);
+		log.info("getUserId: {}", user);
+		return user.getUserId();
 	}
 
 	private static String generateEncodedSalt() {

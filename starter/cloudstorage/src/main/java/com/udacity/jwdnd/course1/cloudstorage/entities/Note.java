@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Note {
-	private Integer noteid;
-	private String notetitle;
-	private String notedescription;
-	private Integer userid;
+	private Integer noteId;
+	private String noteTitle;
+	private String noteDescription;
+	private Integer userId;
 }
