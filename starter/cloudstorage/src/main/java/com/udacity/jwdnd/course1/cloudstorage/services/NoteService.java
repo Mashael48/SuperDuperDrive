@@ -27,6 +27,11 @@ public class NoteService {
 		return noteMapper.update(note);
 	}
 
+	public int deleteNote(Integer noteId) {
+		log.info("deleteNote: {}", noteId);
+		return noteMapper.delete(noteId);
+	}
+
 	public List<Note> getNotesList() {
 		List<Note> notes = noteMapper.getNotesList();
 		log.info("getNotesList: {}" + notes);

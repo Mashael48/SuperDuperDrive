@@ -5,9 +5,10 @@ import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.HOME_PAGE;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.Note;
 import com.udacity.jwdnd.course1.cloudstorage.entities.User;
@@ -17,28 +18,28 @@ import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequestMapping("/note")
 @RequiredArgsConstructor
 public class NoteController {
 
 	private final NoteService noteService;
 	private final UserService userService;
 
-	@GetMapping("/note")
+	@GetMapping()
 	public String viewNote() {
 		return HOME_PAGE;
 	}
 
-	@GetMapping("/notes")
+	@GetMapping("/list")
 	public String viewNotesList() {
 		return HOME_PAGE;
 	}
 
-	@PostMapping("/note")
-	public String createNote(Authentication authentication, Note note, Model model) {
+	@PostMapping()
+	public String createUpdateNote(Authentication authentication, Note note, Model model) {
 		User user = userService.getUser(authentication.getName());
 		note.setUserId(user.getUserId());
 
-		@SuppressWarnings("unused")
 		int success = 0;
 
 		if (note.getNoteId() == null) {
@@ -51,8 +52,10 @@ public class NoteController {
 		return HOME_PAGE;
 	}
 
-	@DeleteMapping("/note")
-	public String deleteNote() {
+	@GetMapping("{noteId}")
+	public String deleteNote(@PathVariable Integer noteId, Model model) {
+		int success = noteService.deleteNote(noteId);
+		updateNotesList(model);
 		return HOME_PAGE;
 	}
 
