@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.Note;
-import com.udacity.jwdnd.course1.cloudstorage.entities.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 
@@ -26,9 +25,10 @@ public class NoteController {
 	private final UserService userService;
 
 	@PostMapping()
-	public String createUpdateNote(Authentication authentication, Note note, Model model) {
-		User user = userService.getUser(authentication.getName());
-		note.setUserId(user.getUserId());
+	public String createUpdateNote(Authentication authentication, Model model, Note note) {
+
+		Integer userId = userService.getUserId(authentication.getName());
+		note.setUserId(userId);
 
 		int success = 0;
 
@@ -38,18 +38,22 @@ public class NoteController {
 			success = noteService.updateNote(note);
 		}
 
-		updateNotesList(model);
+		updateNotesList(model, userId);
 		return HOME_PAGE;
 	}
 
 	@GetMapping("{noteId}")
-	public String deleteNote(@PathVariable Integer noteId, Model model) {
+	public String deleteNote(Authentication authentication, Model model, @PathVariable Integer noteId) {
+
 		int success = noteService.deleteNote(noteId);
-		updateNotesList(model);
+
+		Integer userId = userService.getUserId(authentication.getName());
+		updateNotesList(model, userId);
+
 		return HOME_PAGE;
 	}
 
-	private void updateNotesList(Model model) {
-		model.addAttribute("notesList", noteService.getNotesList());
+	private void updateNotesList(Model model, Integer userId) {
+		model.addAttribute("notesList", noteService.getNotesList(userId));
 	}
 }

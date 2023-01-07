@@ -14,8 +14,8 @@ import com.udacity.jwdnd.course1.cloudstorage.entities.Note;
 @Mapper
 public interface NoteMapper {
 
-	@Select("SELECT * FROM NOTES")
-	List<Note> getNotesList();
+	@Select("SELECT * FROM NOTES WHERE userid = #{userId}")
+	List<Note> getUserNotesList(Integer userId);
 
 	@Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
 	@Options(useGeneratedKeys = true, keyProperty = "noteId")

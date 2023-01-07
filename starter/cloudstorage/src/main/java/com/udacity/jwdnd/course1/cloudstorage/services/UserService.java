@@ -41,6 +41,12 @@ public class UserService {
 		return user;
 	}
 
+	public Integer getUserId(String username) {
+		User user = userMapper.getUser(username);
+		log.info("getUserId: {}", user);
+		return user.getUserId();
+	}
+
 	private static String generateEncodedSalt() {
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[16];
