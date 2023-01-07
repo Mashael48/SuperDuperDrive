@@ -12,11 +12,8 @@ import com.udacity.jwdnd.course1.cloudstorage.entities.File;
 @Mapper
 public interface FileMapper {
 
-	@Select("SELECT * FROM FILES WHERE fileid = #{fileId}")
-	File getFile(Integer fileId);
-
 	@Select("SELECT * FROM FILES WHERE filename = #{fileName}")
-	File getFileByName(String fileName);
+	File getFile(String fileName);
 
 	@Select("SELECT * FROM FILES WHERE userid = #{userId}")
 	List<File> getUserFilesList(Integer userId);

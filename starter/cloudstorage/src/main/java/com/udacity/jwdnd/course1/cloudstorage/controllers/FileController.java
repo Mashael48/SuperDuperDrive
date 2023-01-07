@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/fileUp")
+@RequestMapping("/file")
 @RequiredArgsConstructor
 public class FileController {
 
@@ -54,9 +54,9 @@ public class FileController {
 		return HOME_PAGE;
 	}
 
-	@GetMapping(value = "/{fileId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public @ResponseBody byte[] getFile(@PathVariable Integer fileId) {
-		File file = fileService.getFile(fileId);
+	@GetMapping(value = "/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public @ResponseBody byte[] getFile(@PathVariable String fileName) {
+		File file = fileService.getFile(fileName);
 		return file.getFileData();
 	}
 
