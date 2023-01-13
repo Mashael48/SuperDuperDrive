@@ -72,18 +72,12 @@ public class UAMTests {
 
 	private void signUser(String username, String pass) {
 		SignupPage signupPage = new SignupPage(driver);
-		signupPage.setFirstName("First");
-		signupPage.setLastName("Last");
-		signupPage.setUserName(username);
-		signupPage.setPassword(pass);
-		signupPage.signUp();
+		signupPage.signUpUser("First", "Last", username, pass);
 	}
 
 	private void loginUser(String username, String pass) {
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.setUserName(username);
-		loginPage.setPassword(pass);
-		loginPage.login();
+		loginPage.loginUser(username, pass);
 	}
 
 	private void goLogin() {

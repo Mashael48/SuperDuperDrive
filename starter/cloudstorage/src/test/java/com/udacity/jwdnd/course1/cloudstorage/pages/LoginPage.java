@@ -33,4 +33,10 @@ public class LoginPage {
 	public void login() {
 		js.executeScript("arguments[0].click();", submitButton);
 	}
+
+	public void loginUser(String username, String pass) {
+		this.setUserName(username);
+		this.setPassword(pass);
+		this.login();
+	}
 }

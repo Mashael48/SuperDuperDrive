@@ -74,7 +74,7 @@
 				</div>
 				<div class="tab-pane fade" id="nav-notes" role="tabpanel"
 					aria-labelledby="nav-notes-tab">
-					<button style="margin: 0.25em;" type="button"
+					<button id="btnAddNewNote" style="margin: 0.25em;" type="button"
 						class="btn btn-info float-right" onclick="showNoteModal()">
 						+ Add a New Note</button>
 
@@ -90,17 +90,17 @@
 							<tbody>
 								<tr th:each="note : ${notesList}">
 									<td>
-										<button type="button" class="btn btn-success"
+										<button id="btnEditNote" type="button" class="btn btn-success"
 											th:data-id="${note.noteId}" th:data-title="${note.noteTitle}"
 											th:data-description="${note.noteDescription}"
 											th:onclick="showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'))">
-											Edit</button> <a class="btn btn-danger"
+											Edit</button> <a id="ancDeleteNote" class="btn btn-danger"
 										th:href="@{/note/delete/{noteId}(noteId = ${note.getNoteId()})}">Delete</a>
 									</td>
-									<th th:text="${note.noteTitle}" scope="row">Example Note
-										Title</th>
-									<td th:text="${note.noteDescription}">Example Note
-										Description</td>
+									<th id="tableNoteTitle" th:text="${note.noteTitle}" scope="row">Example
+										Note Title</th>
+									<td id="tableNoteDescription" th:text="${note.noteDescription}">Example
+										Note Description</td>
 								</tr>
 							</tbody>
 						</table>
@@ -136,8 +136,9 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary"
-										onclick="$('#noteSubmit').click();">Save changes</button>
+									<button id="btnSaveChanges" type="button"
+										class="btn btn-primary" onclick="$('#noteSubmit').click();">Save
+										changes</button>
 								</div>
 							</div>
 						</div>

@@ -47,4 +47,12 @@ public class SignupPage {
 	public void signUp() {
 		js.executeScript("arguments[0].click();", submitButton);
 	}
+
+	public void signUpUser(String firstName, String lastName, String username, String pass) {
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setUserName(username);
+		this.setPassword(pass);
+		this.signUp();
+	}
 }
