@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CloudStorageApplicationTests {
 
@@ -49,17 +50,17 @@ class CloudStorageApplicationTests {
 	}
 
 	/**
-	 * PLEASE DO NOT DELETE THIS method.
-	 * Helper method for Udacity-supplied sanity checks.
+	 * PLEASE DO NOT DELETE THIS method. Helper method for Udacity-supplied sanity
+	 * checks.
 	 **/
-	private void doMockSignUp(String firstName, String lastName, String userName, String password){
+	private void doMockSignUp(String firstName, String lastName, String userName, String password) {
 		// Create a dummy account for logging in later.
 
 		// Visit the sign-up page.
 		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
 		driver.get("http://localhost:" + this.port + "/signup");
 		webDriverWait.until(ExpectedConditions.titleContains("Sign Up"));
-		
+
 		// Fill out credentials
 		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputFirstName")));
 		WebElement inputFirstName = driver.findElement(By.id("inputFirstName"));
@@ -86,21 +87,20 @@ class CloudStorageApplicationTests {
 		WebElement buttonSignUp = driver.findElement(By.id("submit-button"));
 		buttonSignUp.click();
 
-		/* Check that the sign up was successful. 
-		// You may have to modify the element "success-msg" and the sign-up 
-		// success message below depening on the rest of your code.
-		*/
-		Assertions.assertTrue(driver.findElement(By.id("success-msg")).getText().contains("You successfully signed up!"));
+		/*
+		 * Check that the sign up was successful. // You may have to modify the element
+		 * "success-msg" and the sign-up // success message below depening on the rest
+		 * of your code.
+		 */
+		Assertions
+				.assertTrue(driver.findElement(By.id("success-msg")).getText().contains("You successfully signed up!"));
 	}
 
-	
-	
 	/**
-	 * PLEASE DO NOT DELETE THIS method.
-	 * Helper method for Udacity-supplied sanity checks.
+	 * PLEASE DO NOT DELETE THIS method. Helper method for Udacity-supplied sanity
+	 * checks.
 	 **/
-	private void doLogIn(String userName, String password)
-	{
+	private void doLogIn(String userName, String password) {
 		// Log in to our dummy account.
 		driver.get("http://localhost:" + this.port + "/login");
 		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
@@ -124,65 +124,61 @@ class CloudStorageApplicationTests {
 	}
 
 	/**
-	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the 
-	 * rest of your code. 
-	 * This test is provided by Udacity to perform some basic sanity testing of 
-	 * your code to ensure that it meets certain rubric criteria. 
+	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the
+	 * rest of your code. This test is provided by Udacity to perform some basic
+	 * sanity testing of your code to ensure that it meets certain rubric criteria.
 	 * 
-	 * If this test is failing, please ensure that you are handling redirecting users 
-	 * back to the login page after a successful sign up.
-	 * Read more about the requirement in the rubric: 
-	 * https://review.udacity.com/#!/rubrics/2724/view 
+	 * If this test is failing, please ensure that you are handling redirecting
+	 * users back to the login page after a successful sign up. Read more about the
+	 * requirement in the rubric: https://review.udacity.com/#!/rubrics/2724/view
 	 */
 	@Test
 	public void testRedirection() {
 		// Create a test account
-		doMockSignUp("Redirection","Test","RT","123");
-		
+		doMockSignUp("Redirection", "Test", "RT", "123");
+
 		// Check if we have been redirected to the log in page.
 		Assertions.assertEquals("http://localhost:" + this.port + "/login", driver.getCurrentUrl());
 	}
 
 	/**
-	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the 
-	 * rest of your code. 
-	 * This test is provided by Udacity to perform some basic sanity testing of 
-	 * your code to ensure that it meets certain rubric criteria. 
+	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the
+	 * rest of your code. This test is provided by Udacity to perform some basic
+	 * sanity testing of your code to ensure that it meets certain rubric criteria.
 	 * 
-	 * If this test is failing, please ensure that you are handling bad URLs 
+	 * If this test is failing, please ensure that you are handling bad URLs
 	 * gracefully, for example with a custom error page.
 	 * 
-	 * Read more about custom error pages at: 
+	 * Read more about custom error pages at:
 	 * https://attacomsian.com/blog/spring-boot-custom-error-page#displaying-custom-error-page
 	 */
 	@Test
 	public void testBadUrl() {
 		// Create a test account
-		doMockSignUp("URL","Test","UT","123");
+		doMockSignUp("URL", "Test", "UT", "123");
 		doLogIn("UT", "123");
-		
+
 		// Try to access a random made-up URL.
 		driver.get("http://localhost:" + this.port + "/some-random-page");
 		Assertions.assertFalse(driver.getPageSource().contains("sorry"));
 	}
 
-
 	/**
-	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the 
-	 * rest of your code. 
-	 * This test is provided by Udacity to perform some basic sanity testing of 
-	 * your code to ensure that it meets certain rubric criteria. 
+	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the
+	 * rest of your code. This test is provided by Udacity to perform some basic
+	 * sanity testing of your code to ensure that it meets certain rubric criteria.
 	 * 
-	 * If this test is failing, please ensure that you are handling uploading large files (>1MB),
-	 * gracefully in your code. 
+	 * If this test is failing, please ensure that you are handling uploading large
+	 * files (>1MB), gracefully in your code.
 	 * 
-	 * Read more about file size limits here: 
-	 * https://spring.io/guides/gs/uploading-files/ under the "Tuning File Upload Limits" section.
+	 * Read more about file size limits here:
+	 * https://spring.io/guides/gs/uploading-files/ under the "Tuning File Upload
+	 * Limits" section.
 	 */
 	@Test
 	public void testLargeUpload() {
 		// Create a test account
-		doMockSignUp("Large File","Test","LFT","123");
+		doMockSignUp("Large File", "Test", "LFT", "123");
 		doLogIn("LFT", "123");
 
 		// Try to upload an arbitrary large file
@@ -203,7 +199,5 @@ class CloudStorageApplicationTests {
 		Assertions.assertFalse(driver.getPageSource().contains("HTTP Status 403 – Forbidden"));
 
 	}
-
-
 
 }
