@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
@@ -18,7 +20,8 @@ public class UserAccessManagementController {
 	private final UserService userService;
 
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(Model model, @ModelAttribute("flashAttribute") Object flashAttribute) {
+		model.addAttribute("signupSuccess", flashAttribute);
 		return "login";
 	}
 
@@ -28,7 +31,7 @@ public class UserAccessManagementController {
 	}
 
 	@PostMapping("/signup")
-	public String signupUser(@ModelAttribute User user, Model model) {
+	public RedirectView signupUser(@ModelAttribute User user, Model model, RedirectAttributes attributes) {
 
 		String signupError = null;
 
@@ -43,12 +46,12 @@ public class UserAccessManagementController {
 		}
 
 		if (signupError == null) {
-			model.addAttribute("signupSuccess", true);
+			attributes.addFlashAttribute("signupSuccess", true);
 		} else {
 			model.addAttribute("signupError", signupError);
 		}
 
-		return "signup";
+		return new RedirectView("login");
 	}
 
 	@GetMapping("/logout")

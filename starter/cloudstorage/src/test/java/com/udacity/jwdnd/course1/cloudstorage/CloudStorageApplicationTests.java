@@ -78,8 +78,8 @@ class CloudStorageApplicationTests {
 		inputPassword.sendKeys(password);
 
 		// Attempt to sign up.
-		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("buttonSignUp")));
-		WebElement buttonSignUp = driver.findElement(By.id("buttonSignUp"));
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit-button")));
+		WebElement buttonSignUp = driver.findElement(By.id("submit-button"));
 		buttonSignUp.click();
 
 		/* Check that the sign up was successful. 
@@ -126,7 +126,7 @@ class CloudStorageApplicationTests {
 	 * your code to ensure that it meets certain rubric criteria. 
 	 * 
 	 * If this test is failing, please ensure that you are handling redirecting users 
-	 * back to the login page after a succesful sign up.
+	 * back to the login page after a successful sign up.
 	 * Read more about the requirement in the rubric: 
 	 * https://review.udacity.com/#!/rubrics/2724/view 
 	 */
