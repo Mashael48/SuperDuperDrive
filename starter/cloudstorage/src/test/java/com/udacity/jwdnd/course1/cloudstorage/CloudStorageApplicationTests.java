@@ -1,9 +1,13 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import java.io.File;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import java.io.File;
+import io.github.bonigarcia.wdm.WebDriverManager;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CloudStorageApplicationTests {
 
@@ -193,7 +197,7 @@ class CloudStorageApplicationTests {
 		uploadButton.click();
 		try {
 			webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
-		} catch (org.openqa.selenium.TimeoutException e) {
+		} catch (@SuppressWarnings("unused") org.openqa.selenium.TimeoutException e) {
 			System.out.println("Large File upload failed");
 		}
 		Assertions.assertFalse(driver.getPageSource().contains("HTTP Status 403 – Forbidden"));
