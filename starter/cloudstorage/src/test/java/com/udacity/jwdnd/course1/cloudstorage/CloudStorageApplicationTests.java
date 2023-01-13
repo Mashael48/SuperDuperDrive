@@ -111,8 +111,8 @@ class CloudStorageApplicationTests {
 		loginPassword.click();
 		loginPassword.sendKeys(password);
 
-		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-button")));
-		WebElement loginButton = driver.findElement(By.id("login-button"));
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit-button")));
+		WebElement loginButton = driver.findElement(By.id("submit-button"));
 		loginButton.click();
 
 		webDriverWait.until(ExpectedConditions.titleContains("Home"));
@@ -159,7 +159,7 @@ class CloudStorageApplicationTests {
 		
 		// Try to access a random made-up URL.
 		driver.get("http://localhost:" + this.port + "/some-random-page");
-		Assertions.assertFalse(driver.getPageSource().contains("Whitelabel Error Page"));
+		Assertions.assertFalse(driver.getPageSource().contains("sorry"));
 	}
 
 
