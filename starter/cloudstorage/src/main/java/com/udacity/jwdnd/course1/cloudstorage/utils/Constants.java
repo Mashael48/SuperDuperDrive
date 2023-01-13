@@ -1,6 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.utils;
 
+import java.net.InetAddress;
+
 public interface Constants {
+
+	// ** Server ** //
+	public static final String IP = InetAddress.getLoopbackAddress().getHostAddress();
 
 	// ** Pages ** //
 	public static final String LOGIN_PAGE = "login";
