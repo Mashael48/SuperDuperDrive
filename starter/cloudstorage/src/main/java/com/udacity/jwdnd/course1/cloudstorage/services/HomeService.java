@@ -1,10 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.CREDENTIALS_LIST;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.CREDENTIAL_SERVICE;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.FILES_LIST;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.FILE_FORM;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.NOTES_LIST;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

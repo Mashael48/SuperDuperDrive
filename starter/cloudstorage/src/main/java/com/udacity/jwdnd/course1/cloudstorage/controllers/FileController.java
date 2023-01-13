@@ -1,34 +1,22 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.DUBLICATE_FILE_NAME;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.ERROR;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.MESSAGE;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.NOT_SAVED;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.RESULT_PAGE;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.SUCCESS;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.*;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.File;
 import com.udacity.jwdnd.course1.cloudstorage.entities.FileForm;
-import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
-import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
-import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.services.*;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/file")
+@RequestMapping("/" + FILE_PAGE)
 @RequiredArgsConstructor
 public class FileController {
 
@@ -54,7 +42,6 @@ public class FileController {
 		}
 
 		homeService.updatePage(authentication, model);
-
 		return RESULT_PAGE;
 	}
 

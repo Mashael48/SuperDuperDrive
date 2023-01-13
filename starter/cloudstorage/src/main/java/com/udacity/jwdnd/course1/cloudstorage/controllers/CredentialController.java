@@ -1,27 +1,19 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.CREDENTIAL_SERVICE;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.NOT_SAVED;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.RESULT_PAGE;
-import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.SUCCESS;
+import static com.udacity.jwdnd.course1.cloudstorage.utils.Constants.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.udacity.jwdnd.course1.cloudstorage.entities.Credential;
-import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
-import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
-import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.services.*;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/credential")
+@RequestMapping("/" + CREDENTIAL_PAGE)
 @RequiredArgsConstructor
 public class CredentialController {
 
