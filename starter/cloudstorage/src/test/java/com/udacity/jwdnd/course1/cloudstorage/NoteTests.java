@@ -54,6 +54,8 @@ public class NoteTests {
 		Note note = homePage.getFirstNote();
 		Assertions.assertEquals(noteTitle, note.getNoteTitle());
 		Assertions.assertEquals(noteDescription, note.getNoteDescription());
+
+		deleteNote(homePage);
 		homePage.logout();
 	}
 
@@ -75,6 +77,9 @@ public class NoteTests {
 		Note note = homePage.getFirstNote();
 		Assertions.assertEquals(modifiedNoteTitle, note.getNoteTitle());
 		Assertions.assertEquals(modifiedNoteDescription, note.getNoteDescription());
+
+		deleteNote(homePage);
+		homePage.logout();
 	}
 
 	@Test
